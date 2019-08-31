@@ -1934,18 +1934,16 @@ int64_t GetBlockValue(int nHeight)
 	
     if (nHeight == 0) {
 	nSubsidy = 0 * COIN;
-    	} else if (nHeight == 1) {
-        nSubsidy = 7000000 * COIN;
 	} else if (nHeight <= Params().LAST_POW_BLOCK() && nHeight > 1) { //end PoW
-        nSubsidy = 10.8 * COIN;
-	} else if (nHeight <= 238620 && nHeight > Params().LAST_POW_BLOCK()) { //Start PoS
-        nSubsidy = 10.8 * COIN;
-	} else if (nHeight <= 764221 && nHeight >= 238621) {
-        nSubsidy = 9 * COIN;
+        nSubsidy = 6900 * COIN;
+	} else if (nHeight <= 525000 && nHeight > Params().LAST_POW_BLOCK()) { //Start PoS
+        nSubsidy = 20 * COIN;
+	} else if (nHeight <= 764221 && nHeight >= 525001) {
+        nSubsidy = 10 * COIN;
 	} else if (nHeight <= 1289222 && nHeight >= 764222) {
         nSubsidy = 5.4 * COIN;
 	}    else {
-        nSubsidy = 5.4 * COIN;
+        nSubsidy = 2 * COIN;
 	}
 	int64_t nMoneySupply = chainActive.Tip()->nMoneySupply;
         int64_t nBlockValue = nSubsidy;
@@ -2200,20 +2198,13 @@ CAmount GetSeeSaw(const CAmount& blockValue, int nMasternodeCount, int nHeight)
 int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCount, bool iszlsrStake){
     int64_t ret = 0;
 
-    if (Params().NetworkID() == CBaseChainParams::TESTNET) {
-        if (nHeight < 200)
-            return 0;
-    }
-	
-	// initial blocks have no mn reward
-	if (nHeight <= 165) {
-	      ret = blockValue  / 100 * 0;
-	} else if (nHeight > 165) {
-		  ret = blockValue  / 100 * 80; //80%
-		
-	}
-			
-	
+    // No rewards till masternode activation.
+    if (nHeight < Params().LAST_POW_BLOCK() || blockValue == 0)
+        return 0;
+
+    // Check if we reached coin supply
+    ret = blockValue * 0.80; // 80% of block reward
+
     return ret;
 }
 

@@ -135,9 +135,9 @@ public:
         nMaturity = 30;
         nMasternodeCountDrift = 20;
         nMasternodeCollateralLimit = 10000; //MN collateral
-        nMaxMoneyOut = 21000000 * COIN; //21 mill
+        nMaxMoneyOut = 37000000 * COIN; //21 mill
         /** Height or Time Based Activations **/
-        nLastPOWBlock = 200;
+        nLastPOWBlock = 650;
         nModifierUpdateBlock = INT_MAX;
         nZerocoinStartHeight = INT_MAX;
         nZerocoinStartTime = INT_MAX; // October 17, 2017 4:30:00 AM
@@ -221,10 +221,10 @@ public:
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 48);
 	base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 19);
         base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 46);
-        base58Prefixes[EXT_PUBLIC_KEY] = (0x04)(0x88)(0xB2)(0x1E).convert_to_container<std::vector<unsigned char> >();
-        base58Prefixes[EXT_SECRET_KEY] = (0x04)(0x88)(0xAD)(0xE4).convert_to_container<std::vector<unsigned char> >();
+	base58Prefixes[EXT_PUBLIC_KEY] = list_of(0x02)(0x2D)(0x25)(0x33).convert_to_container<std::vector<unsigned char> >();
+	base58Prefixes[EXT_SECRET_KEY] = list_of(0x02)(0x21)(0x01)(0x9B).convert_to_container<std::vector<unsigned char> >();
         // 	BIP44 coin type is from https://github.com/satoshilabs/slips/blob/master/slip-0044.md
-        base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x01)(0x9b).convert_to_container<std::vector<unsigned char> >();
+        nExtCoinType = 411;
 
         convertSeed6(vFixedSeeds, pnSeed6_main, ARRAYLEN(pnSeed6_main));
 
@@ -240,7 +240,7 @@ public:
         nPoolMaxTransactions = 3;
         nBudgetCycleBlocks = 43200; //!< Amount of blocks in a months period of time (using 1 minutes per) = (60*24*30)
         strSporkKey = "0425327ef0ddc4b289af5aa983da548722bd0c77f58f4a5b18b3c33936cbd07e7d9c7468fa2eece017712dcff60dce354241e2ced0b4c77316a841c43d1d952129";
-        strMasternodePoolDummyAddress = "LSJVWUkt6HtSCY2SaJ2akeyJUg8bg1hW3S";
+        strObfuscationPoolDummyAddress = "LSJVWUkt6HtSCY2SaJ2akeyJUg8bg1hW3S";
         nStartMasternodePayments = 1403728576; //Wed, 25 Jun 2014 20:36:16 GMT
 
         /** Zerocoin */
