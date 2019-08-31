@@ -1,0 +1,3 @@
+usr/local/bin/leisurecoind usr/bin
+usr/local/bin/leisurecoin-cli usr/bin
+debian/examples/leisurecoin.conf etc/leisurecoin

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=leisurecoin
+Comment=leisurecoin P2P Cryptocurrency
+Exec=leisurecoin-qt %u
+Terminal=false
+Type=Application
+Icon=leisurecoin128
+MimeType=x-scheme-handler/leisurecoin;
+Categories=Office;Finance;
+StartupWMClass=leisurecoin-qt
+Name[en_US]=leisurecoin-qt.desktop

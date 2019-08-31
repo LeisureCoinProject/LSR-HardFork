@@ -1,0 +1,81 @@
+policy_module(leisurecoin, 1.100.1)
+
+########################################
+#
+# Declarations
+#
+
+type leisurecoin_t;
+type leisurecoin_exec_t;
+init_daemon_domain(leisurecoin_t, leisurecoin_exec_t)
+
+permissive leisurecoin_t;
+
+type leisurecoin_initrc_exec_t;
+init_script_file(leisurecoin_initrc_exec_t)
+
+type leisurecoin_conf_t;
+files_type(leisurecoin_conf_t)
+
+type leisurecoin_var_lib_t;
+files_type(leisurecoin_var_lib_t)
+
+type leisurecoin_var_run_t;
+files_type(leisurecoin_var_run_t)
+
+type leisurecoin_port_t;
+corenet_port(leisurecoin_port_t)
+
+########################################
+#
+# leisurecoin local policy
+#
+allow leisurecoin_t self:process { fork };
+
+allow leisurecoin_t self:fifo_file rw_fifo_file_perms;
+allow leisurecoin_t self:unix_stream_socket create_stream_socket_perms;
+
+manage_dirs_pattern(leisurecoin_t, leisurecoin_conf_t, leisurecoin_conf_t)
+manage_files_pattern(leisurecoin_t, leisurecoin_conf_t, leisurecoin_conf_t)
+
+manage_dirs_pattern(leisurecoin_t, leisurecoin_var_lib_t, leisurecoin_var_lib_t)
+manage_files_pattern(leisurecoin_t, leisurecoin_var_lib_t, leisurecoin_var_lib_t)
+files_var_lib_filetrans(leisurecoin_t, leisurecoin_var_lib_t, { dir file })
+
+manage_dirs_pattern(leisurecoin_t, leisurecoin_var_run_t, leisurecoin_var_run_t)
+manage_files_pattern(leisurecoin_t, leisurecoin_var_run_t, leisurecoin_var_run_t)
+
+sysnet_dns_name_resolve(leisurecoin_t)
+corenet_all_recvfrom_unlabeled(leisurecoin_t)
+
+allow leisurecoin_t self:tcp_socket create_stream_socket_perms;
+corenet_tcp_sendrecv_generic_if(leisurecoin_t)
+corenet_tcp_sendrecv_generic_node(leisurecoin_t)
+corenet_tcp_sendrecv_all_ports(leisurecoin_t)
+corenet_tcp_bind_generic_node(leisurecoin_t)
+
+gen_require(`
+    type leisurecoin_port_t;
+')
+allow leisurecoin_t leisurecoin_port_t:tcp_socket name_bind;
+
+gen_require(`
+    type leisurecoin_port_t;
+')
+allow leisurecoin_t leisurecoin_port_t:tcp_socket name_connect;
+
+domain_use_interactive_fds(leisurecoin_t)
+
+files_read_etc_files(leisurecoin_t)
+
+miscfiles_read_localization(leisurecoin_t)
+
+sysnet_dns_name_resolve(leisurecoin_t)
+
+allow leisurecoin_t leisurecoin_exec_t:file execute_no_trans;
+allow leisurecoin_t self:process setsched;
+corecmd_exec_ls(leisurecoin_t)
+corenet_tcp_connect_http_port(leisurecoin_t)
+dev_read_urand(leisurecoin_t)
+fs_getattr_xattr_fs(leisurecoin_t)
+kernel_read_system_state(leisurecoin_t)

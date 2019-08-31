@@ -1,0 +1,8 @@
+/usr/bin/leisurecoin-cli		--	gen_context(system_u:object_r:leisurecoin_exec_t,s0)
+/usr/sbin/leisurecoind		--	gen_context(system_u:object_r:leisurecoin_exec_t,s0)
+/usr/lib(64)?/leisurecoin/leisurecoind		--	gen_context(system_u:object_r:leisurecoin_exec_t,s0)
+
+/etc/leisurecoin(/.*)?		gen_context(system_u:object_r:leisurecoin_conf_t,s0)
+/var/lib/leisurecoin(/.*)?		gen_context(system_u:object_r:leisurecoin_var_lib_t,s0)
+
+(/var)?/run/leisurecoind(/.*)?   gen_context(system_u:object_r:leisurecoin_var_run_t,s0)

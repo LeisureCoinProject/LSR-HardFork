@@ -1,0 +1,6 @@
+usr/local/bin/leisurecoin-qt usr/bin
+share/pixmaps/leisurecoin32.xpm usr/share/pixmaps
+share/pixmaps/leisurecoin16.xpm usr/share/pixmaps
+share/pixmaps/leisurecoin128.png usr/share/pixmaps
+debian/leisurecoin-qt.desktop usr/share/applications
+debian/leisurecoin-qt.protocol usr/share/kde4/services/
