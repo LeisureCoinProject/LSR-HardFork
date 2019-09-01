@@ -59,7 +59,8 @@ static Checkpoints::MapCheckpoints mapCheckpoints =
     (0,      uint256("0x000008bee9b7f7714e2c7cdaf80af916a107aa3b0f61b91496e614bea9f2fb3d"))
     (1000,      uint256("0x0703a06a675224d03e0e413a2277aec4067f5d4949b01df0bcfbbd4d1467c15c"))
     (25000,      uint256("0x7462342a89cfac8115ae7f4baba5c9323686a990cc555aca5879f29ea417fe05"))
-    (448631 ,      uint256("0x2b5ae695151e73bd9653b992b9368bf216666e11ac3e683bc9bf87bfa6068e0a"));
+    (448631,      uint256("0x2b5ae695151e73bd9653b992b9368bf216666e11ac3e683bc9bf87bfa6068e0a"))
+    (448632,       uint256("0x0000020c2d242a24576e7b9141cf8df2d41693df3efbe38b39355768992d45ca"));
 
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
@@ -169,47 +170,19 @@ public:
         genesis.nVersion = 1;
         genesis.nTime = 1567272011; 
         genesis.nBits = 0x1e0ffff0;
-	genesis.nNonce = 0; 
+	genesis.nNonce = 2952759; 
 
-// uncomment to log genesis block info        
-//     //  start
-        if (true && genesis.GetHash() != hashGenesisBlock)
-                       {
-                           printf("Searching for genesis block...\n");
-                           uint256 hashTarget = uint256().SetCompact(genesis.nBits);
-                           uint256 thash;
-                           while (true)
-                           {
-                               thash = genesis.GetHash();
-                               if (thash <= hashTarget)
-                                   break;
-                               if ((genesis.nNonce & 0xFFF) == 0)
-                               {
-                                   printf("nonce %08X: hash = %s (target = %s)\n", genesis.nNonce, thash.ToString().c_str(), hashTarget.ToString().c_str());
-                               }
-                               ++genesis.nNonce;
-                               if (genesis.nNonce == 0)
-                               {
-                                   printf("NONCE WRAPPED, incrementing time\n");
-                                   ++genesis.nTime;
-                               }
-                           }
-                           printf("genesis.nTime = %u \n", genesis.nTime);
-                           printf("genesis.nNonce = %u \n", genesis.nNonce);
-                           printf("genesis.nVersion = %u \n", genesis.nVersion);
-                           printf("genesis.GetHash = %s\n", genesis.GetHash().ToString().c_str()); //first this, then comment this line out and uncomment the one under.
-                           printf("genesis.hashMerkleRoot = %s \n", genesis.hashMerkleRoot.ToString().c_str()); //improvised. worked for me, to find merkle root
-
-               }
-
-        //end
+	/*
+	genesis.nTime = 1567272011 
+	genesis.nNonce = 2952759 
+	genesis.nVersion = 1 
+	genesis.GetHash = 0000020c2d242a24576e7b9141cf8df2d41693df3efbe38b39355768992d45ca
+	genesis.hashMerkleRoot = 0402abc9aacdbcdab074aadddba5a534b58d9fb91a409718332fabaccbdda8b4 
+	*/
 
         hashGenesisBlock = genesis.GetHash();
-       // MineGenesis(genesis);
-        //debug code
-	//    std::cout << "genesisinfo \n " << genesis.ToString();
-        assert(hashGenesisBlock == uint256("0x0000093cfce0a5a3cecea522e2c13bdf055d65c559fd2222730ba6f0d18dd2cd")); 
-        assert(genesis.hashMerkleRoot == uint256("0x7c3f1b5874e38c421d07fc20ce79ddb3bbaad19cdbad903a0b185070d6005b8c")); 
+        assert(hashGenesisBlock == uint256("0x0000020c2d242a24576e7b9141cf8df2d41693df3efbe38b39355768992d45ca")); 
+        assert(genesis.hashMerkleRoot == uint256("0x0402abc9aacdbcdab074aadddba5a534b58d9fb91a409718332fabaccbdda8b4")); 
 
 	vFixedSeeds.clear();
         vSeeds.clear();
@@ -224,7 +197,7 @@ public:
 	base58Prefixes[EXT_PUBLIC_KEY] = list_of(0x02)(0x2D)(0x25)(0x33).convert_to_container<std::vector<unsigned char> >();
 	base58Prefixes[EXT_SECRET_KEY] = list_of(0x02)(0x21)(0x01)(0x9B).convert_to_container<std::vector<unsigned char> >();
         // 	BIP44 coin type is from https://github.com/satoshilabs/slips/blob/master/slip-0044.md
-        nExtCoinType = 411;
+        base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x01)(0x9b).convert_to_container<std::vector<unsigned char> >();
 
         convertSeed6(vFixedSeeds, pnSeed6_main, ARRAYLEN(pnSeed6_main));
 
@@ -318,8 +291,8 @@ public:
         genesis.nNonce = 5510938;
 
 	hashGenesisBlock = genesis.GetHash();
-        assert(hashGenesisBlock == uint256("0x0000093cfce0a5a3cecea522e2c13bdf055d65c559fd2222730ba6f0d18dd2cd"));
-	assert(genesis.hashMerkleRoot == uint256("0x7c3f1b5874e38c421d07fc20ce79ddb3bbaad19cdbad903a0b185070d6005b8c"));
+        //assert(hashGenesisBlock == uint256("0x0000093cfce0a5a3cecea522e2c13bdf055d65c559fd2222730ba6f0d18dd2cd"));
+	//assert(genesis.hashMerkleRoot == uint256("0x7c3f1b5874e38c421d07fc20ce79ddb3bbaad19cdbad903a0b185070d6005b8c"));
 
         vFixedSeeds.clear();
         vSeeds.clear();
@@ -406,8 +379,8 @@ public:
 
 
 	hashGenesisBlock = genesis.GetHash();
-        assert(hashGenesisBlock == uint256("0x0000093cfce0a5a3cecea522e2c13bdf055d65c559fd2222730ba6f0d18dd2cd"));
-        assert(genesis.hashMerkleRoot == uint256("0x7c3f1b5874e38c421d07fc20ce79ddb3bbaad19cdbad903a0b185070d6005b8c"));
+        //assert(hashGenesisBlock == uint256("0x0000093cfce0a5a3cecea522e2c13bdf055d65c559fd2222730ba6f0d18dd2cd"));
+        //assert(genesis.hashMerkleRoot == uint256("0x7c3f1b5874e38c421d07fc20ce79ddb3bbaad19cdbad903a0b185070d6005b8c"));
 
         vFixedSeeds.clear(); //! Testnet mode doesn't have any fixed seeds.
         vSeeds.clear();      //! Testnet mode doesn't have any DNS seeds.
