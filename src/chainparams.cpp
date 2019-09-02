@@ -135,7 +135,7 @@ public:
         nTargetSpacing = 2 * 60; //leisurecoin: 1 Min
         nMaturity = 30;
         nMasternodeCountDrift = 20;
-        nMasternodeCollateralLimit = 10000; //MN collateral
+        nMasternodeCollateralLimit = 25000; //MN collateral
         nMaxMoneyOut = 37000000 * COIN; //21 mill
         /** Height or Time Based Activations **/
         nLastPOWBlock = 650;
