@@ -64,7 +64,7 @@ static Checkpoints::MapCheckpoints mapCheckpoints =
 
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
-    1567272011, // * UNIX timestamp of last checkpoint block
+    1516926684, // * UNIX timestamp of last checkpoint block
     4000,    // * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the SetBestChain debug.log lines)
     200};        // * estimated number of transactions per day after checkpoint
@@ -133,10 +133,10 @@ public:
         nMinerThreads = 0;
         nTargetTimespan = 1 * 60; // leisurecoin: 1 day  
         nTargetSpacing = 2 * 60; //leisurecoin: 1 Min
-        nMaturity = 30;
+        nMaturity = 10;
         nMasternodeCountDrift = 20;
         nMasternodeCollateralLimit = 25000; //MN collateral
-        nMaxMoneyOut = 37000000 * COIN; //21 mill
+        nMaxMoneyOut = 41000000 * COIN; //21 mill
         /** Height or Time Based Activations **/
         nLastPOWBlock = 650;
         nModifierUpdateBlock = INT_MAX;
@@ -157,7 +157,7 @@ public:
         nFakeSerialBlockheightEnd = 1686229;
       //  nSupplyBeforeFakeSerial = 4131563 * COIN;   // zerocoin supply at block nFakeSerialBlockheightEnd
 
-        const char* pszTimestamp = "LeisureCoin Repowered Launch - akshaynexus - Liquid369";
+        const char* pszTimestamp = "POLITICO 070618 China slams U.S. over \u2018largest trade war in economic history";
         CMutableTransaction txNew;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
@@ -168,9 +168,9 @@ public:
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
-        genesis.nTime = 1567272011; 
+        genesis.nTime = 1531416388;
         genesis.nBits = 0x1e0ffff0;
-	genesis.nNonce = 2952759; 
+        genesis.nNonce = 1590115;
 
 	/*
 	genesis.nTime = 1567272011 
@@ -181,8 +181,8 @@ public:
 	*/
 
         hashGenesisBlock = genesis.GetHash();
-        assert(hashGenesisBlock == uint256("0x0000020c2d242a24576e7b9141cf8df2d41693df3efbe38b39355768992d45ca")); 
-        assert(genesis.hashMerkleRoot == uint256("0x0402abc9aacdbcdab074aadddba5a534b58d9fb91a409718332fabaccbdda8b4")); 
+        assert(hashGenesisBlock == uint256("0x000008bee9b7f7714e2c7cdaf80af916a107aa3b0f61b91496e614bea9f2fb3d"));
+        assert(genesis.hashMerkleRoot == uint256("0x4ae7b9c4bb852a1a443319cd5332ffe9c7349ad036daeb70b288509bd389505f"));
 
 	vFixedSeeds.clear();
         vSeeds.clear();
@@ -192,16 +192,16 @@ public:
         //vSeeds.push_back(CDNSSeedData("144.202.7.213", "144.202.7.213"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 48);
-	base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 19);
+	base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 8);
         base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 46);
-	base58Prefixes[EXT_PUBLIC_KEY] = list_of(0x02)(0x2D)(0x25)(0x33).convert_to_container<std::vector<unsigned char> >();
-	base58Prefixes[EXT_SECRET_KEY] = list_of(0x02)(0x21)(0x01)(0x9B).convert_to_container<std::vector<unsigned char> >();
+	base58Prefixes[EXT_PUBLIC_KEY] = list_of(0x04)(0x88)(0xB2)(0x1E).convert_to_container<std::vector<unsigned char> >();
+	base58Prefixes[EXT_SECRET_KEY] = list_of(0x04)(0x88)(0xAD)(0xE4).convert_to_container<std::vector<unsigned char> >();
         // 	BIP44 coin type is from https://github.com/satoshilabs/slips/blob/master/slip-0044.md
-        base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x01)(0x9b).convert_to_container<std::vector<unsigned char> >();
+        base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x00)(0xde).convert_to_container<std::vector<unsigned char> >();
 
         convertSeed6(vFixedSeeds, pnSeed6_main, ARRAYLEN(pnSeed6_main));
 
-        fMiningRequiresPeers = false;
+        fMiningRequiresPeers = true;
         fAllowMinDifficultyBlocks = true;
         fDefaultConsistencyChecks = false;
         fRequireStandard = true;
